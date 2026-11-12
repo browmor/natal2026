@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio de Natal - BROWMOR</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            lightest: '#fef6f8',
+                            light: '#fce8ed',
+                            DEFAULT: '#e07a93',
+                            dark: '#b5536c',
+                            gold: '#d4af37',
+                            darkgold: '#997d22'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #2b1d22; /* Fundo escuro atrás do cardápio */
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-6 px-4">
+
+    <!-- Header / Brand Intro -->
+    <header class="text-center mb-6 z-10 max-w-md w-full">
+        <div class="inline-flex items-center gap-2 bg-brand-light px-4 py-1.5 rounded-full text-brand-dark text-xs font-semibold tracking-widest uppercase mb-2 shadow-sm border border-pink-200">
+            <i class="fa-solid fa-tree text-brand"></i> Especial de Natal 2026 <i class="fa-solid fa-star text-brand-gold"></i>
+        </div>
+        <h1 class="font-serif text-3xl font-bold text-pink-100 tracking-wide mb-1">BROWMOR</h1>
+        <p class="text-pink-300 text-xs font-medium">Artesanal e exclusivamente brownificada</p>
+    </header>
+
+    <!-- Main Content Container: Vertical Flow -->
+    <main class="w-full max-w-md bg-gradient-to-b from-[#e07a93] via-[#fff5f7] to-[#fff0f3] rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-pink-200/50">
+        
+        <!-- COVER SECTION -->
+        <section class="flex flex-col items-center justify-center p-8 text-center text-white relative overflow-hidden bg-gradient-to-b from-[#b5536c] to-[#923d54] shrink-0 rounded-t-3xl border-b-4 border-brand-light">
+            <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            
+            <div class="z-10 w-full flex flex-col items-center">
+                <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-4xl shadow-lg mb-3">
+                    🎄
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.3em] font-semibold bg-white/20 px-3 py-1 rounded-full text-pink-100">Coleção Especial</span>
+                <h2 class="font-serif text-4xl font-bold tracking-wider mt-3 text-white">NATAL</h2>
+                
+                <!-- Info Box -->
+                <div class="mt-6 w-full bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-4 text-left shadow-lg">
+                    <h4 class="font-bold text-white text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-info text-brand-gold"></i> Informações Importantes</h4>
+                    <ul class="text-pink-50 text-xs space-y-2.5 font-medium leading-tight">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-gift text-brand-gold mt-0.5"></i> ✨ Encomendas abertas somente até dia 17/12!</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-credit-card text-brand-gold mt-0.5"></i> 💳 Pagamento: 50% de sinal + 50% na entrega. Aceitamos cartões!</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU ITEMS SECTION -->
+        <section class="flex-1 flex flex-col p-5 gap-6">
+            
+            <!-- Category Header -->
+            <div class="flex items-center gap-3 w-full">
+                <div class="h-px bg-pink-200 flex-1"></div>
+                <h2 class="font-serif text-brand-dark font-bold text-lg italic">Sobremesas Premium</h2>
+                <div class="h-px bg-pink-200 flex-1"></div>
+            </div>
+
+            <!-- MENU LIST 1 -->
+            <div class="flex flex-col gap-3">
+
+                <!-- Guirlanda -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/guirlanda.jpg" alt="Guirlanda" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">✨ Guirlanda de Natal (20cm)</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Kinder Bueno, morangos e chocolate branco</p>
+                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 130,00</span></div>
+                    </div>
+                </div>
+
+                <!-- Empadão -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/empadao.jpg" alt="Empadão" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🥧 Empadão Cremoso</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Frango com Requeijão</p>
+                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
+                            <span>1kg: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 89</strong></span>
+                            <span>2kg: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 159</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brownoffe -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/brownoffe.jpg" alt="Brownoffe" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍮 Brownoffe na Travessa</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Brownie, doce de leite e banana</p>
+                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
+                            <span>M: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 129</strong></span>
+                            <span>G: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 149</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Limão -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/limao.jpg" alt="Limão" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍋 Limão na Travessa</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Brownie e mousse de limão</p>
+                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
+                            <span>M: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 89</strong></span>
+                            <span>G: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 115</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+               <!-- Supreme (Atualizado) -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/supreme.jpg" alt="Supreme" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍓 Brownie Supreme</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Brigadeiro, morangos e mousse</p>
+                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
+                            <span>M: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 149,99</strong></span>
+                            <span>G: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 168,99</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Category Header -->
+            <div class="flex items-center gap-3 w-full mt-4">
+                <div class="h-px bg-pink-200 flex-1"></div>
+                <h2 class="font-serif text-brand-dark font-bold text-lg italic">Porções Individuais</h2>
+                <div class="h-px bg-pink-200 flex-1"></div>
+            </div>
+
+            <!-- MENU LIST 2 -->
+            <div class="flex flex-col gap-3">
+
+                <!-- Rabanadas -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/rabanada.jpg" alt="Rabanada" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🥖 Rabanadas Especiais</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Nutella, Doce de Leite, Chocolate ou Ninho</p>
+                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
+                            <span>1 un.: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 9,99</strong></span>
+                            <span>Kit c/4: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 35,99</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brownietone -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/brownietone.jpg" alt="Brownietone" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🎁 Brownietone (~250g)</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Doce de Leite c/ Nozes OU Ninho c/ Nutella</p>
+                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 24,99</span></div>
+                    </div>
+                </div>
+
+                <!-- Brownie 5x5 -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/brownie5x5.jpg" alt="Brownie 5x5" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍫 Brownie 5x5</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Brownie suculento tradicional</p>
+                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 9,99</span></div>
+                    </div>
+                </div>
+
+                <!-- Cookie na Lata -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
+                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                        <img src="assets/cookie.jpg" alt="Cookie" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 pr-1">
+                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍪 Cookie na Lata</h3>
+                        <p class="text-xs text-gray-500 leading-tight mb-2">Recheio de Nutella e Kinder Bueno</p>
+                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 28,49</span></div>
+                    </div>
+                </div>
+
+            </div>
+            
+           <!-- Footer Branding -->
+            <div class="mt-8 flex flex-col items-center justify-center text-center pb-4">
+                <!-- Círculo com a logo MAIOR -->
+                <div class="w-24 h-24 rounded-full shadow-md mb-3 overflow-hidden border-2 border-brand-light">
+                    <img src="assets/logo.jpg" alt="Logo Browmor" class="w-full h-full object-cover">
+                </div>
+                
+                <h3 class="font-bold text-brand-dark text-base">BROWMOR</h3>
+                <p class="text-xs text-gray-500 font-medium">Cardápio Oficial - Natal 2026</p>
+            </div>
+
+        </section>
+    </main>
+</body>
+</html>

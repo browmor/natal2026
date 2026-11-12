@@ -35,13 +35,15 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #2b1d22; /* Fundo escuro atrás do cardápio */
+            background-color: #2b1d22;
             margin: 0;
             padding: 0;
+            /* Para o scroll suave no carrinho */
+            scroll-behavior: smooth;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-6 px-4">
+<body class="min-h-screen flex flex-col items-center py-6 px-4 relative">
 
     <!-- Header / Brand Intro -->
     <header class="text-center mb-6 z-10 max-w-md w-full">
@@ -77,8 +79,8 @@
             </div>
         </section>
 
-        <!-- MENU ITEMS SECTION -->
-        <section class="flex-1 flex flex-col p-5 gap-6">
+        <!-- MENU ITEMS SECTION (Adicionado pb-28 para o carrinho flutuante não cobrir o rodapé) -->
+        <section class="flex-1 flex flex-col p-5 gap-6 pb-28">
             
             <!-- Category Header -->
             <div class="flex items-center gap-3 w-full">
@@ -88,76 +90,154 @@
             </div>
 
             <!-- MENU LIST 1 -->
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-4">
 
                 <!-- Guirlanda -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/guirlanda.jpg" alt="Guirlanda" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/guirlanda.jpg" alt="Guirlanda" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">✨ Guirlanda (20cm)</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Kinder Bueno, morangos e chocolate branco</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">✨ Guirlanda de Natal (20cm)</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Kinder Bueno, morangos e chocolate branco</p>
-                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 130,00</span></div>
+                    <!-- Controller -->
+                    <div class="flex items-center justify-between bg-pink-50/50 p-2 rounded-lg border border-pink-100 mt-1">
+                        <span class="text-brand-dark font-bold text-sm">R$ 130,00</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateCart('guirlanda', 'Guirlanda de Natal', 130, -1)" class="w-7 h-7 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                            <span id="qty-guirlanda" class="text-sm font-bold w-4 text-center text-gray-800">0</span>
+                            <button onclick="updateCart('guirlanda', 'Guirlanda de Natal', 130, 1)" class="w-7 h-7 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Empadão -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/empadao.jpg" alt="Empadão" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/empadao.jpg" alt="Empadão" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🥧 Empadão Cremoso</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Frango com Requeijão</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🥧 Empadão Cremoso</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Frango com Requeijão</p>
-                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
-                            <span>1kg: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 89</strong></span>
-                            <span>2kg: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 159</strong></span>
+                    <!-- Controllers -->
+                    <div class="flex flex-col gap-1.5 mt-1">
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">1kg: <strong class="text-brand-dark text-xs">R$ 89,00</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('empadao1', 'Empadão (1kg)', 89, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-empadao1" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('empadao1', 'Empadão (1kg)', 89, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">2kg: <strong class="text-brand-dark text-xs">R$ 159,00</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('empadao2', 'Empadão (2kg)', 159, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-empadao2" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('empadao2', 'Empadão (2kg)', 159, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Brownoffe -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/brownoffe.jpg" alt="Brownoffe" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/brownoffe.jpg" alt="Brownoffe" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍮 Brownoffe na Travessa</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Brownie, doce de leite e banana</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍮 Brownoffe na Travessa</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Brownie, doce de leite e banana</p>
-                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
-                            <span>M: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 129</strong></span>
-                            <span>G: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 149</strong></span>
+                    <!-- Controllers -->
+                    <div class="flex flex-col gap-1.5 mt-1">
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Tam. M: <strong class="text-brand-dark text-xs">R$ 129,00</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('brown-m', 'Brownoffe (M)', 129, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-brown-m" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('brown-m', 'Brownoffe (M)', 129, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Tam. G: <strong class="text-brand-dark text-xs">R$ 149,00</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('brown-g', 'Brownoffe (G)', 149, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-brown-g" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('brown-g', 'Brownoffe (G)', 149, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Limão -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/limao.jpg" alt="Limão" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/limao.jpg" alt="Limão" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍋 Limão na Travessa</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Brownie e mousse de limão</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍋 Limão na Travessa</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Brownie e mousse de limão</p>
-                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
-                            <span>M: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 89</strong></span>
-                            <span>G: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 115</strong></span>
+                    <!-- Controllers -->
+                    <div class="flex flex-col gap-1.5 mt-1">
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Tam. M: <strong class="text-brand-dark text-xs">R$ 89,00</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('limao-m', 'Limão (M)', 89, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-limao-m" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('limao-m', 'Limão (M)', 89, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Tam. G: <strong class="text-brand-dark text-xs">R$ 115,00</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('limao-g', 'Limão (G)', 115, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-limao-g" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('limao-g', 'Limão (G)', 115, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-               <!-- Supreme (Atualizado) -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/supreme.jpg" alt="Supreme" class="w-full h-full object-cover">
+                <!-- Supreme -->
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/supreme.jpg" alt="Supreme" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍓 Brownie Supreme</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Brigadeiro, morangos e mousse</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍓 Brownie Supreme</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Brigadeiro, morangos e mousse</p>
-                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
-                            <span>M: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 149,99</strong></span>
-                            <span>G: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 168,99</strong></span>
+                    <!-- Controllers -->
+                    <div class="flex flex-col gap-1.5 mt-1">
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Tam. M: <strong class="text-brand-dark text-xs">R$ 149,99</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('sup-m', 'Supreme (M)', 149.99, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-sup-m" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('sup-m', 'Supreme (M)', 149.99, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Tam. G: <strong class="text-brand-dark text-xs">R$ 168,99</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('sup-g', 'Supreme (G)', 168.99, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-sup-g" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('sup-g', 'Supreme (G)', 168.99, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,80 +245,315 @@
             </div>
 
             <!-- Category Header -->
-            <div class="flex items-center gap-3 w-full mt-4">
+            <div class="flex items-center gap-3 w-full mt-6">
                 <div class="h-px bg-pink-200 flex-1"></div>
                 <h2 class="font-serif text-brand-dark font-bold text-lg italic">Porções Individuais</h2>
                 <div class="h-px bg-pink-200 flex-1"></div>
             </div>
 
             <!-- MENU LIST 2 -->
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-4">
 
                 <!-- Rabanadas -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/rabanada.jpg" alt="Rabanada" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/rabanada.jpg" alt="Rabanada" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🥖 Rabanadas Especiais</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Nutella, Doce de Leite, Choc ou Ninho</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🥖 Rabanadas Especiais</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Nutella, Doce de Leite, Chocolate ou Ninho</p>
-                        <div class="flex justify-start items-center text-xs font-medium text-gray-600 gap-3">
-                            <span>1 un.: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 9,99</strong></span>
-                            <span>Kit c/4: <strong class="text-brand-dark bg-brand-light/50 px-1.5 py-0.5 rounded">R$ 35,99</strong></span>
+                    <!-- Controllers -->
+                    <div class="flex flex-col gap-1.5 mt-1">
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">1 Unidade: <strong class="text-brand-dark text-xs">R$ 9,99</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('rab-1', 'Rabanada (1 un)', 9.99, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-rab-1" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('rab-1', 'Rabanada (1 un)', 9.99, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-pink-50/50 p-1.5 rounded-lg border border-pink-100">
+                            <span class="text-[11px] font-medium text-gray-700">Combo c/ 4: <strong class="text-brand-dark text-xs">R$ 35,99</strong></span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCart('rab-4', 'Rabanada (Combo 4)', 35.99, -1)" class="w-6 h-6 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                                <span id="qty-rab-4" class="text-xs font-bold w-3 text-center text-gray-800">0</span>
+                                <button onclick="updateCart('rab-4', 'Rabanada (Combo 4)', 35.99, 1)" class="w-6 h-6 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Brownietone -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/brownietone.jpg" alt="Brownietone" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/brownietone.jpg" alt="Brownietone" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🎁 Brownietone (~250g)</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Doce de Leite OU Ninho c/ Nutella</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🎁 Brownietone (~250g)</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Doce de Leite c/ Nozes OU Ninho c/ Nutella</p>
-                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 24,99</span></div>
+                    <!-- Controller -->
+                    <div class="flex items-center justify-between bg-pink-50/50 p-2 rounded-lg border border-pink-100 mt-1">
+                        <span class="text-brand-dark font-bold text-sm">R$ 24,99</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateCart('btone', 'Brownietone', 24.99, -1)" class="w-7 h-7 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                            <span id="qty-btone" class="text-sm font-bold w-4 text-center text-gray-800">0</span>
+                            <button onclick="updateCart('btone', 'Brownietone', 24.99, 1)" class="w-7 h-7 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Brownie 5x5 -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/brownie5x5.jpg" alt="Brownie 5x5" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/brownie5x5.jpg" alt="Brownie 5x5" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍫 Brownie 5x5</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Brownie suculento tradicional</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍫 Brownie 5x5</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Brownie suculento tradicional</p>
-                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 9,99</span></div>
+                    <!-- Controller -->
+                    <div class="flex items-center justify-between bg-pink-50/50 p-2 rounded-lg border border-pink-100 mt-1">
+                        <span class="text-brand-dark font-bold text-sm">R$ 9,99</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateCart('b5x5', 'Brownie 5x5', 9.99, -1)" class="w-7 h-7 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                            <span id="qty-b5x5" class="text-sm font-bold w-4 text-center text-gray-800">0</span>
+                            <button onclick="updateCart('b5x5', 'Brownie 5x5', 9.99, 1)" class="w-7 h-7 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Cookie na Lata -->
-                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex items-center gap-3.5 hover:shadow-md transition-shadow">
-                    <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
-                        <img src="assets/cookie.jpg" alt="Cookie" class="w-full h-full object-cover">
+                <div class="bg-white/95 rounded-2xl p-2.5 shadow-sm border border-pink-100 flex flex-col gap-2 hover:shadow-md transition-shadow">
+                    <div class="flex gap-3.5 items-center">
+                        <div class="w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-pink-50">
+                            <img src="assets/cookie.jpg" alt="Cookie" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 pr-1">
+                            <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍪 Cookie na Lata</h3>
+                            <p class="text-xs text-gray-500 leading-tight">Recheio de Nutella e Kinder Bueno</p>
+                        </div>
                     </div>
-                    <div class="flex-1 pr-1">
-                        <h3 class="font-bold text-gray-900 text-sm font-serif mb-0.5">🍪 Cookie na Lata</h3>
-                        <p class="text-xs text-gray-500 leading-tight mb-2">Recheio de Nutella e Kinder Bueno</p>
-                        <div class="flex justify-between items-center"><span class="text-brand-dark font-bold bg-brand-light/50 px-2 py-0.5 rounded text-xs">R$ 28,49</span></div>
+                    <!-- Controller -->
+                    <div class="flex items-center justify-between bg-pink-50/50 p-2 rounded-lg border border-pink-100 mt-1">
+                        <span class="text-brand-dark font-bold text-sm">R$ 28,49</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateCart('cookie', 'Cookie na Lata', 28.49, -1)" class="w-7 h-7 rounded-full bg-brand-light text-brand-dark font-bold flex items-center justify-center">-</button>
+                            <span id="qty-cookie" class="text-sm font-bold w-4 text-center text-gray-800">0</span>
+                            <button onclick="updateCart('cookie', 'Cookie na Lata', 28.49, 1)" class="w-7 h-7 rounded-full bg-brand text-white font-bold flex items-center justify-center">+</button>
+                        </div>
                     </div>
                 </div>
 
             </div>
             
-           <!-- Footer Branding -->
+            <!-- Footer Branding -->
             <div class="mt-8 flex flex-col items-center justify-center text-center pb-4">
-                <!-- Círculo com a logo MAIOR -->
-                <div class="w-24 h-24 rounded-full shadow-md mb-3 overflow-hidden border-2 border-brand-light">
+                <div class="w-24 h-24 rounded-full shadow-md mb-3 overflow-hidden border-2 border-brand-light bg-white flex items-center justify-center">
                     <img src="assets/logo.jpg" alt="Logo Browmor" class="w-full h-full object-cover">
                 </div>
-                
                 <h3 class="font-bold text-brand-dark text-base">BROWMOR</h3>
                 <p class="text-xs text-gray-500 font-medium">Cardápio Oficial - Natal 2026</p>
             </div>
 
         </section>
     </main>
+
+    <!-- FLOATING CART BUTTON -->
+    <button id="floating-cart" onclick="toggleModal(true)" class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[380px] bg-brand-dark text-white rounded-2xl p-4 shadow-2xl z-40 hidden justify-between items-center hover:bg-pink-800 transition-all border border-pink-300">
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <i class="fa-solid fa-basket-shopping text-2xl"></i>
+                <span id="cart-total-items" class="absolute -top-2 -right-3 bg-brand-gold text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
+            </div>
+            <span class="font-bold text-sm">Finalizar Pedido</span>
+        </div>
+        <span id="cart-total-price" class="font-bold text-lg tracking-wide">R$ 0,00</span>
+    </button>
+
+    <!-- CART MODAL (CHECKOUT) -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex-col justify-end">
+        <div class="bg-white w-full max-w-md mx-auto rounded-t-3xl overflow-hidden flex flex-col max-h-[85vh]">
+            
+            <!-- Modal Header -->
+            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-brand-lightest">
+                <h3 class="font-serif font-bold text-brand-dark text-lg"><i class="fa-solid fa-clipboard-list"></i> Resumo do Pedido</h3>
+                <button onclick="toggleModal(false)" class="text-gray-400 hover:text-brand-dark transition-colors"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            </div>
+            
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-5 overflow-y-auto flex-1 flex flex-col gap-4">
+                
+                <!-- Lista de Itens -->
+                <div id="cart-items-list" class="flex flex-col divide-y divide-gray-100">
+                    <!-- Os itens via Javascript entram aqui -->
+                </div>
+                
+                <!-- Total -->
+                <div class="flex justify-between items-center py-2 border-t-2 border-brand-light mt-1">
+                    <span class="font-bold text-gray-800 text-lg">Total</span>
+                    <span id="modal-total-price" class="font-bold text-brand-dark text-xl">R$ 0,00</span>
+                </div>
+                
+                <!-- Formulário do Cliente -->
+                <div class="flex flex-col gap-3 mt-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 mb-1 block">Seu Nome Completo:</label>
+                        <input type="text" id="customer-name" placeholder="Ex: Maria Silva" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:border-brand ring-brand/20 focus:ring-2 transition-all">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 mb-1 block">Endereço de Entrega (Ou digite Retirada):</label>
+                        <input type="text" id="customer-address" placeholder="Ex: Rua X, 123 - Nova Iguaçu" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:outline-none focus:border-brand ring-brand/20 focus:ring-2 transition-all">
+                    </div>
+                </div>
+
+                <!-- Info do PIX -->
+                <div class="bg-brand-light/40 border border-brand-light p-3 rounded-xl flex gap-3 items-start">
+                    <i class="fa-brands fa-pix text-teal-600 mt-0.5 text-lg"></i>
+                    <div>
+                        <p class="text-xs font-bold text-gray-800 mb-0.5">Pagamento de Sinal (50%) via PIX</p>
+                        <p class="text-[11px] text-gray-600">Chave Celular: <strong class="text-brand-dark">21972250916</strong></p>
+                        <p class="text-[10px] text-gray-500 mt-1">O valor exato do sinal será gerado na mensagem enviada no WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <button onclick="sendOrder()" class="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-green-200 transition-all flex justify-center items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIC JAVASCRIPT DO CARRINHO -->
+    <script>
+        let cart = {};
+
+        // Atualiza as quantidades no carrinho
+        function updateCart(id, name, price, change) {
+            if (!cart[id]) {
+                cart[id] = { name: name, price: price, qty: 0 };
+            }
+            
+            cart[id].qty += change;
+            if (cart[id].qty < 0) cart[id].qty = 0; // Não deixa ficar negativo
+            
+            // Atualiza o numerozinho visual no meio dos botões
+            document.getElementById('qty-' + id).innerText = cart[id].qty;
+            
+            // Recalcula totais gerais
+            updateFloatingCart();
+        }
+
+        // Calcula os totais e mostra/esconde o botão de baixo
+        function updateFloatingCart() {
+            let totalItems = 0;
+            let totalPrice = 0;
+            
+            for (let id in cart) {
+                totalItems += cart[id].qty;
+                totalPrice += cart[id].qty * cart[id].price;
+            }
+            
+            const floatBtn = document.getElementById('floating-cart');
+            
+            if (totalItems > 0) {
+                floatBtn.classList.remove('hidden');
+                floatBtn.classList.add('flex');
+                document.getElementById('cart-total-price').innerText = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+                document.getElementById('cart-total-items').innerText = totalItems;
+            } else {
+                floatBtn.classList.add('hidden');
+                floatBtn.classList.remove('flex');
+                toggleModal(false); // Fecha o modal se esvaziar o carrinho
+            }
+        }
+
+        // Abre e fecha a tela preta de checkout
+        function toggleModal(show) {
+            const modal = document.getElementById('cart-modal');
+            if (show) {
+                renderModalItems();
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // Monta a lista de itens dentro do checkout
+        function renderModalItems() {
+            const list = document.getElementById('cart-items-list');
+            list.innerHTML = '';
+            let totalPrice = 0;
+            
+            for (let id in cart) {
+                if (cart[id].qty > 0) {
+                    const subtotal = cart[id].qty * cart[id].price;
+                    totalPrice += subtotal;
+                    
+                    list.innerHTML += `
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-sm font-medium text-gray-700"><strong class="text-brand-dark">${cart[id].qty}x</strong> ${cart[id].name}</span>
+                            <span class="text-sm font-bold text-gray-900">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                    `;
+                }
+            }
+            document.getElementById('modal-total-price').innerText = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Formata a mensagem e joga pro Whatsapp
+        function sendOrder() {
+            const name = document.getElementById('customer-name').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+            
+            if(!name) {
+                alert('Por favor, preencha seu nome para continuarmos!');
+                document.getElementById('customer-name').focus();
+                return;
+            }
+
+            let orderText = `🎄 *NOVA ENCOMENDA DE NATAL - BROWMOR* 🎄\n\n`;
+            orderText += `*Cliente:* ${name}\n`;
+            orderText += `*Endereço/Retirada:* ${address ? address : 'A combinar / Retirar'}\n\n`;
+            orderText += `*Itens do Pedido:*\n`;
+            
+            let totalPrice = 0;
+            for (let id in cart) {
+                if (cart[id].qty > 0) {
+                    const subtotal = cart[id].qty * cart[id].price;
+                    totalPrice += subtotal;
+                    orderText += `▪️ ${cart[id].qty}x ${cart[id].name} (R$ ${subtotal.toFixed(2).replace('.', ',')})\n`;
+                }
+            }
+            
+            const sinalPrice = totalPrice / 2;
+
+            orderText += `\n*VALOR TOTAL: R$ ${totalPrice.toFixed(2).replace('.', ',')}*\n`;
+            orderText += `------------------------\n`;
+            orderText += `*SINAL NECESSÁRIO (50%): R$ ${sinalPrice.toFixed(2).replace('.', ',')}*\n`;
+            orderText += `*PIX (Celular):* 21972250916\n`;
+            orderText += `------------------------\n\n`;
+            orderText += `Segue o comprovante do sinal 👇`;
+
+            // Número oficial configurado (55 + DDD + Numero)
+            const phone = "5521972250916"; 
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(orderText)}`;
+            
+            // Abre o whatsapp em uma nova aba
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
